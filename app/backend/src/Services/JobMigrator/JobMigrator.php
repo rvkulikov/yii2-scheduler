@@ -43,7 +43,7 @@ class JobMigrator implements JobMigratorInterface
         $class = match ($strategy) {
             self::STRATEGY_HARD => MigrationBuilderHard::class,
             self::STRATEGY_SOFT => MigrationBuilderSoft::class,
-            default => throw new InvalidArgumentException("Unknown strategy {$strategy}")
+            default => throw new InvalidArgumentException("Unknown strategy $strategy")
         };
 
         /** @var MigrationBuilderInterface $builder */

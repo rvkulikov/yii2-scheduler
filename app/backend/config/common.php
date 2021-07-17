@@ -22,6 +22,9 @@ use Rvkulikov\Yii2\Scheduler\Services\ScheduleRepository\ScheduleRepository;
 use Rvkulikov\Yii2\Scheduler\Services\ScheduleRepository\ScheduleRepositoryInterface;
 
 return [
+    'aliases' => [
+        '@Rvkulikov\Yii2\Scheduler' => dirname(__DIR__ . '/src')
+    ],
     'singletons' => [
         DefinitionLocatorInterface::class => [
             'class'               => DefinitionLocator::class,
@@ -31,11 +34,12 @@ return [
             'scheduleFilterClass' => ScheduleFilter::class,
         ],
         ConnectionLocatorInterface::class => [
-            'class'         => ConnectionLocator::class,
-            'connection'    => 'db',
-            'schema'        => '_app_schedule',
-            'tableJob'      => 'job',
-            'tableSchedule' => 'schedule',
+            'class'          => ConnectionLocator::class,
+            'connection'     => 'db',
+            'schema'         => '_app_schedule',
+            'tableJob'       => 'job',
+            'tableSchedule'  => 'schedule',
+            'tableMigration' => 'migration',
         ],
         JobsLocatorInterface::class       => [
             'class'        => JobsLocator::class,

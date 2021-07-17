@@ -1,6 +1,4 @@
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-
-/** @noinspection PhpMissingFieldTypeInspection */
+<?php /** @noinspection PhpUnused,PhpUnhandledExceptionInspection,PhpMissingFieldTypeInspection */
 
 namespace Rvkulikov\Yii2\Scheduler\Data;
 

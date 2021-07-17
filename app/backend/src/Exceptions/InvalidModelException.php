@@ -24,7 +24,7 @@ class InvalidModelException extends HttpException
         $error   = Json::decode($error);
         $error   = Json::encode($error, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
         $class   = get_class($this->model);
-        $message = "Model {$class} is invalid:\n{$error}";
+        $message = "Model $class is invalid:\n$error";
 
         return trim($message);
     }

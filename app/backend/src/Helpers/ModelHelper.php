@@ -70,7 +70,7 @@ class ModelHelper
                         ? get_class($data)
                         : gettype($data);
 
-                    throw new InvalidConfigException("\$data is not an array or {$class} instance. {$given} given.");
+                    throw new InvalidConfigException("\$data is not an array or $class instance. $given given.");
                 }
             }
         }

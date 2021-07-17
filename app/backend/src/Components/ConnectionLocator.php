@@ -11,13 +11,24 @@ class ConnectionLocator extends BaseObject implements ConnectionLocatorInterface
 {
     public function __construct(
         $config = [],
-        protected string $connection = 'db',
+        protected string $db = 'db',
         protected ?string $schema = '_app_schedule',
         protected string $tableJob = 'job',
         protected string $tableSchedule = 'schedule',
+        protected string $tableMigration = 'migration',
     )
     {
         parent::__construct($config);
+    }
+
+    public function getDb(): string
+    {
+        return $this->db;
+    }
+
+    public function setDb(string $db): void
+    {
+        $this->db = $db;
     }
 
     /**
@@ -25,14 +36,9 @@ class ConnectionLocator extends BaseObject implements ConnectionLocatorInterface
      */
     public function getConnection(): Connection
     {
-        $db = Yii::$app->get($this->connection);
+        $db = Yii::$app->get($this->db);
 
         return $db;
-    }
-
-    public function setConnection(mixed $connection): void
-    {
-        $this->connection = $connection;
     }
 
     public function getSchema(): string
@@ -65,10 +71,22 @@ class ConnectionLocator extends BaseObject implements ConnectionLocatorInterface
         $this->tableSchedule = $tableSchedule;
     }
 
-    public function qualify(?string $schema, string $relation): string
+    public function getTableMigration(): string
     {
+        return $this->tableMigration;
+    }
+
+    public function setTableMigration(string $tableMigration): void
+    {
+        $this->tableMigration = $tableMigration;
+    }
+
+    public function qualify(string $relation, ?string $schema = null): string
+    {
+        $schema ??= $this->getSchema();
+
         return $schema
-            ? "{$schema}.{$relation}"
+            ? "$schema.$relation"
             : $relation;
     }
 }

@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpMissingReturnTypeInspection */
+<?php
 
 namespace Rvkulikov\Yii2\Scheduler\Services\JobRepository;
 

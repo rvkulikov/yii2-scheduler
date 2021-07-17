@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpUnhandledExceptionInspection */
+<?php /** @noinspection PhpUnused,PhpUnhandledExceptionInspection */
 
 namespace Rvkulikov\Yii2\Scheduler\Controllers;
 

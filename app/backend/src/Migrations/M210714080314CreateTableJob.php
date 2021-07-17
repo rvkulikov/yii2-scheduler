@@ -14,12 +14,12 @@ class M210714080314CreateTableJob extends Migration
         $this->db = $locator->getConnection();
 
         $tableJob = $locator->getTableJob();
-        $fullJob  = $locator->qualify($locator->getSchema(), $tableJob);
+        $fullJob  = $locator->qualify($tableJob);
 
         $sql = /** @lang PostgreSQL */
             <<<SQL
 -- noinspection SqlResolve
-create table {$fullJob}
+create table $fullJob
 (
   job_id          uuid not null generated always as ( public.uuid_generate_v4() ) stored,
   job_alias       text not null,
@@ -47,7 +47,7 @@ SQL;
         $locator  = Yii::createObject(ConnectionLocatorInterface::class);
         $this->db = $locator->getConnection();
 
-        $table = $locator->qualify($locator->getSchema(), $locator->getTableJob());
+        $table = $locator->qualify($locator->getTableJob());
 
         $this->dropTable($table);
 

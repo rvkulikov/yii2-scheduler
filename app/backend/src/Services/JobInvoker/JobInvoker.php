@@ -34,7 +34,7 @@ class JobInvoker implements JobInvokerInterface
 
         /** @var JobDefinition $job */
         if (($job = $jobs[$key] ?? null) === null) {
-            throw new NotFoundHttpException("Job {$key} was not found");
+            throw new NotFoundHttpException("Job $key was not found");
         }
 
         $callback = $job->getCallback();

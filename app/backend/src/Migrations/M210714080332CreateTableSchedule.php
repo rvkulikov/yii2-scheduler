@@ -14,15 +14,15 @@ class M210714080332CreateTableSchedule extends Migration
         $this->db = $locator->getConnection();
 
         $tableJob = $locator->getTableJob();
-        $fullJob  = $locator->qualify($locator->getSchema(), $tableJob);
+        $fullJob  = $locator->qualify($tableJob);
 
         $tableSchedule = $locator->getTableSchedule();
-        $fullSchedule  = $locator->qualify($locator->getSchema(), $tableSchedule);
+        $fullSchedule  = $locator->qualify($tableSchedule);
 
         $sql = /** @lang PostgreSQL */
             <<<SQL
 -- noinspection SqlResolve
-create table {$fullSchedule}
+create table $fullSchedule
 (
   schedule_job_alias     text not null,
   schedule_expression    text not null,
@@ -31,7 +31,7 @@ create table {$fullSchedule}
 
   constraint {$tableSchedule}_schedule_job_alias_fk
     foreign key (schedule_job_alias)
-      references {$fullJob} (job_alias)
+      references $fullJob (job_alias)
       on delete cascade 
       on update cascade,
 
@@ -63,7 +63,7 @@ SQL;
         $locator  = Yii::createObject(ConnectionLocatorInterface::class);
         $this->db = $locator->getConnection();
 
-        $table = $locator->qualify($locator->getSchema(), $locator->getTableSchedule());
+        $table = $locator->qualify($locator->getTableSchedule());
 
         $this->dropTable($table);
 

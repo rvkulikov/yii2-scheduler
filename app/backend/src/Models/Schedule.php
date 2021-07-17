@@ -33,7 +33,7 @@ class Schedule extends ActiveRecord
     public static function tableName(): string
     {
         $locator = Yii::createObject(ConnectionLocatorInterface::class);
-        $table   = $locator->qualify($locator->getSchema(), $locator->getTableSchedule());
+        $table   = $locator->qualify($locator->getTableSchedule());
 
         return $table;
     }

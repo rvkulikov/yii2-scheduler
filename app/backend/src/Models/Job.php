@@ -29,7 +29,7 @@ class Job extends ActiveRecord
     public static function tableName(): string
     {
         $locator = Yii::createObject(ConnectionLocatorInterface::class);
-        $table   = $locator->qualify($locator->getSchema(), $locator->getTableJob());
+        $table   = $locator->qualify($locator->getTableJob());
 
         return $table;
     }
