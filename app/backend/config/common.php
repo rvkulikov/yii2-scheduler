@@ -39,6 +39,7 @@ return [
         ],
         JobsLocatorInterface::class       => [
             'class'        => JobsLocator::class,
+            'preprocessor' => null,
             'definitions'  => [],
         ],
         SettingsLocatorInterface::class   => [
