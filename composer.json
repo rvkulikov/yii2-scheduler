@@ -1,0 +1,33 @@
+{
+  "name": "rvkulikov/yii2-scheduler",
+  "description": "",
+  "type": "project",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=8.0",
+    "ext-json": "*",
+    "yiisoft/yii2": "~2.0"
+  },
+  "config": {
+    "process-timeout": 1800
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "\\Rvkulikov\\Yii2\\Scheduler\\": "app/backend/src"
+    }
+  },
+  "extra": {
+    "config-plugin": {
+      "common": [
+        "app/backend/config/common.php"
+      ]
+    }
+  }
+}
