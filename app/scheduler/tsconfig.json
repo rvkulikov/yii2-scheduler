@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "system",
+    "module": "CommonJS",
     "esModuleInterop": true,
     "target": "ESNext",
     "moduleResolution": "node",
