@@ -9,9 +9,9 @@ use Rvkulikov\Yii2\Scheduler\Models\Schedule;
 use Rvkulikov\Yii2\Scheduler\Services\ScheduleRepository\ScheduleRepositoryInterface;
 use Yii;
 use yii\data\DataProviderInterface;
-use yii\rest\ActiveController;
+use yii\rest\Controller;
 
-class SchedulesController extends ActiveController
+class SchedulesController extends Controller
 {
     public $serializer = Serializer::class;
 

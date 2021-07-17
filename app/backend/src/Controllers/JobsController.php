@@ -9,9 +9,9 @@ use Rvkulikov\Yii2\Scheduler\Services\JobInvoker\JobInvokerInterface;
 use Rvkulikov\Yii2\Scheduler\Services\JobRepository\JobRepositoryInterface;
 use Yii;
 use yii\data\DataProviderInterface;
-use yii\rest\ActiveController;
+use yii\rest\Controller;
 
-class JobsController extends ActiveController
+class JobsController extends Controller
 {
     public $serializer = Serializer::class;
 
