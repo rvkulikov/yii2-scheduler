@@ -6,6 +6,7 @@ class JobDefinition
 {
     public function __construct(
         public string $alias,
+        public mixed $callback,
         public ?string $name = null,
         public ?string $description = null,
         public ?string $stateAlias = null,
@@ -22,6 +23,16 @@ class JobDefinition
     public function setAlias(string $alias): void
     {
         $this->alias = $alias;
+    }
+
+    public function getCallback(): callable
+    {
+        return $this->callback;
+    }
+
+    public function setCallback(callable $callback): void
+    {
+        $this->callback = $callback;
     }
 
     public function getName(): ?string
@@ -54,11 +65,17 @@ class JobDefinition
         $this->stateAlias = $stateAlias;
     }
 
+    /**
+     * @return ScheduleDefinition[]
+     */
     public function getScheduleDefinitions(): array
     {
         return $this->scheduleDefinitions;
     }
 
+    /**
+     * @param ScheduleDefinition[] $scheduleDefinitions
+     */
     public function setScheduleDefinitions(array $scheduleDefinitions): void
     {
         $this->scheduleDefinitions = $scheduleDefinitions;

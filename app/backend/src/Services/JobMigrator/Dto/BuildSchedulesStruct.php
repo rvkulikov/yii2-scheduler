@@ -4,9 +4,6 @@ namespace Rvkulikov\Yii2\Scheduler\Services\JobMigrator\Dto;
 use Rvkulikov\Yii2\Scheduler\Dto\ScheduleDefinition;
 use Rvkulikov\Yii2\Scheduler\Models\Job;
 
-/**
- * @property ScheduleDefinition[] $scheduleDefinitions
- */
 class BuildSchedulesStruct
 {
     public function __construct(
@@ -16,6 +13,9 @@ class BuildSchedulesStruct
     {
     }
 
+    /**
+     * @return ScheduleDefinition[]
+     */
     public function getScheduleDefinitions(): array
     {
         return $this->scheduleDefinitions;

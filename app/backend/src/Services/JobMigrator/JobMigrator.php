@@ -70,16 +70,16 @@ class JobMigrator implements JobMigratorInterface
      */
     protected function migrateJobs(MigrateJobsStruct $struct): array
     {
-        foreach ($struct->delete as $job) {
+        foreach ($struct->getDelete() as $job) {
             $job->delete();
         }
 
-        foreach ($struct->create as $definition) {
+        foreach ($struct->getCreate() as $definition) {
             $job      = $this->jobRepository->create($definition);
             $result[] = new BuildSchedulesStruct($job, $definition->getScheduleDefinitions());
         }
 
-        foreach ($struct->update as $update) {
+        foreach ($struct->getUpdate() as $update) {
             $job      = $this->jobRepository->update($update->getModel(), $update->getDefinition());
             $result[] = new BuildSchedulesStruct($job, $update->definition->getScheduleDefinitions());
         }
@@ -91,21 +91,20 @@ class JobMigrator implements JobMigratorInterface
      * @param MigrateSchedulesStruct $struct
      *
      * @throws InvalidModelException
-     * @throws StaleObjectException
      * @throws Throwable
      * @throws InvalidConfigException
      */
     private function migrateSchedules(MigrateSchedulesStruct $struct)
     {
-        foreach ($struct->delete as $schedule) {
+        foreach ($struct->getDelete() as $schedule) {
             $schedule->delete();
         }
 
-        foreach ($struct->create as $definition) {
+        foreach ($struct->getCreate() as $definition) {
             $this->scheduleRepository->create($definition);
         }
 
-        foreach ($struct->update as $update) {
+        foreach ($struct->getUpdate() as $update) {
             $this->scheduleRepository->update($update->getModel(), $update->getDefinition());
         }
     }

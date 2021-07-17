@@ -1,9 +1,9 @@
 import {ScheduledTask} from "node-cron";
 
 declare namespace app {
-    type CreateTuple = [string, CronSchedule];
+    type CreateTuple = [string, Schedule];
     type RemoveTuple = [string, ScheduledTask];
-    type CronSchedulesEnvelope = ResponseEnvelope<CronSchedule>;
+    type CronSchedulesEnvelope = ResponseEnvelope<Schedule>;
 
     type ResponseEnvelope<T> = {
         items: T[];
@@ -25,7 +25,7 @@ declare namespace app {
         }
     }
 
-    type CronJob = {
+    type Job = {
         job_id: string;
         job_alias: string;
         job_title: string;
@@ -33,7 +33,7 @@ declare namespace app {
         job_state_alias: string;
     }
 
-    type CronSchedule = {
+    type Schedule = {
         schedule_job_alias: string;
         schedule_expression: string;
         schedule_state_alias: string;

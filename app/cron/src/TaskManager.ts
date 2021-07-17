@@ -2,7 +2,7 @@ import {schedule as scheduleJob, ScheduledTask} from "node-cron";
 import {app} from "../@types";
 import {AxiosInstance} from "axios";
 import Dict = NodeJS.Dict;
-import CronSchedule = app.CronSchedule;
+import CronSchedule = app.Schedule;
 import CreateTuple = app.CreateTuple;
 import RemoveTuple = app.RemoveTuple;
 import CronSchedulesEnvelope = app.CronSchedulesEnvelope;
