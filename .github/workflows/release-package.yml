@@ -26,9 +26,6 @@ jobs:
         with:
           context: .
           file: deployment/docker/scheduler/Dockerfile
-          pull: true
           push: true
-          cache-from: type=registry,ref=${{ github.repository }}/scheduler:latest
-          cache-to: type=inline
           tags: |
-            ${{ github.repository }}/scheduler:latest
+            rvkulikov/yii2-scheduler/scheduler:latest
