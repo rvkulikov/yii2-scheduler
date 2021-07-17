@@ -27,5 +27,4 @@ jobs:
           context: .
           file: deployment/docker/scheduler/Dockerfile
           push: true
-          tags: |
-            rvkulikov/yii2-scheduler/scheduler:latest
+          tags: ghcr.io/${{ github.repository_owner }}/<image-name>:${{ env.IMAGE_TAG }}
