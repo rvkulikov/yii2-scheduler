@@ -1,6 +1,6 @@
 // noinspection HttpUrlsUsage
 
-import TaskManager from "./TaskManager";
+import TaskManager from "./src/TaskManager";
 
 const express = require("express");
 const logger  = require("morgan");

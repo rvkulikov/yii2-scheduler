@@ -7,11 +7,12 @@ import CreateTuple = app.CreateTuple;
 import RemoveTuple = app.RemoveTuple;
 import CronSchedulesEnvelope = app.CronSchedulesEnvelope;
 import TaskManagerConfig = app.TaskManagerConfig;
+import Timeout = NodeJS.Timeout;
 
 // noinspection HttpUrlsUsage
 export default class TaskManager {
     private tasks: Dict<ScheduledTask> = {};
-    private intervalId: number;
+    private intervalId: Timeout;
 
     constructor(
         private readonly axios: AxiosInstance,
@@ -98,8 +99,9 @@ export default class TaskManager {
     }
 
     public syncJobs() {
-        const url     = `http://${this.config.baseUrl}/${this.config.scheduleIndexPath}`;
-        const promise = this.axios.get(url).then((result) => {
+        const url = `http://${this.config.baseUrl}/${this.config.scheduleIndexPath}`;
+
+        return this.axios.get(url).then((result) => {
             let envelope: CronSchedulesEnvelope = result.data;
             if (envelope._runtime.cronEnabled) {
                 this.setTasks(envelope.items)
@@ -107,8 +109,6 @@ export default class TaskManager {
                 this.flushTasks();
             }
         });
-
-        return promise;
     }
 
     public async invokeJob(key: string) {
