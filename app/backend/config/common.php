@@ -22,38 +22,40 @@ use Rvkulikov\Yii2\Scheduler\Services\ScheduleRepository\ScheduleRepository;
 use Rvkulikov\Yii2\Scheduler\Services\ScheduleRepository\ScheduleRepositoryInterface;
 
 return [
-    'aliases' => [
+    'aliases'   => [
         '@Rvkulikov\Yii2\Scheduler' => dirname(__DIR__ . '/src')
     ],
-    'singletons' => [
-        DefinitionLocatorInterface::class => [
-            'class'               => DefinitionLocator::class,
-            'jobClass'            => Job::class,
-            'scheduleClass'       => Schedule::class,
-            'jobFilterClass'      => JobFilter::class,
-            'scheduleFilterClass' => ScheduleFilter::class,
-        ],
-        ConnectionLocatorInterface::class => [
-            'class'          => ConnectionLocator::class,
-            'connection'     => 'db',
-            'schema'         => '_app_schedule',
-            'tableJob'       => 'job',
-            'tableSchedule'  => 'schedule',
-            'tableMigration' => 'migration',
-        ],
-        JobsLocatorInterface::class       => [
-            'class'        => JobsLocator::class,
-            'preprocessor' => null,
-            'definitions'  => [],
-        ],
-        SettingsLocatorInterface::class   => [
-            'class'       => SettingsLocator::class,
-            'cronEnabled' => fn() => false,
-        ],
+    'container' => [
+        'singletons' => [
+            DefinitionLocatorInterface::class => [
+                'class'               => DefinitionLocator::class,
+                'jobClass'            => Job::class,
+                'scheduleClass'       => Schedule::class,
+                'jobFilterClass'      => JobFilter::class,
+                'scheduleFilterClass' => ScheduleFilter::class,
+            ],
+            ConnectionLocatorInterface::class => [
+                'class'          => ConnectionLocator::class,
+                'connection'     => 'db',
+                'schema'         => '_app_schedule',
+                'tableJob'       => 'job',
+                'tableSchedule'  => 'schedule',
+                'tableMigration' => 'migration',
+            ],
+            JobsLocatorInterface::class       => [
+                'class'        => JobsLocator::class,
+                'preprocessor' => null,
+                'definitions'  => [],
+            ],
+            SettingsLocatorInterface::class   => [
+                'class'       => SettingsLocator::class,
+                'cronEnabled' => fn() => false,
+            ],
 
-        JobInvokerInterface::class         => JobInvoker::class,
-        JobMigratorInterface::class        => JobMigrator::class,
-        JobRepositoryInterface::class      => JobRepository::class,
-        ScheduleRepositoryInterface::class => ScheduleRepository::class,
+            JobInvokerInterface::class         => JobInvoker::class,
+            JobMigratorInterface::class        => JobMigrator::class,
+            JobRepositoryInterface::class      => JobRepository::class,
+            ScheduleRepositoryInterface::class => ScheduleRepository::class,
+        ],
     ],
 ];
