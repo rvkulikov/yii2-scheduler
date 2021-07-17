@@ -7,16 +7,16 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "node-cron": "^2.0.3",
-    "axios": "^0.21",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "node-cron": "^2",
+    "axios": "^0",
+    "debug": "~2",
+    "express": "~4",
+    "morgan": "~1"
   },
   "devDependencies": {
     "@types/express": "^4",
-    "@types/node": "^14.10.2",
-    "@types/axios": "^0.14.0",
+    "@types/node": "^16",
+    "@types/axios": "^0",
     "@types/node-cron": "^2"
   }
 }
