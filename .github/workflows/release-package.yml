@@ -22,6 +22,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: deployment/docker/scheduler/Dockerfile
           pull: true
           push: true
           cache-from: type=registry,ref=rvkulikov/yii2-scheduler/scheduler:latest
