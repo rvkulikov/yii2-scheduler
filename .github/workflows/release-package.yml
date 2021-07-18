@@ -32,4 +32,4 @@ jobs:
           file: deployment/docker/scheduler/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/yii2-scheduler/scheduler:latest
+            ghcr.io/${{ github.repository }}/scheduler:latest
