@@ -22,6 +22,8 @@ export default class TaskManager {
     }
 
     public startInterval() {
+        // noinspection JSIgnoredPromiseFromCall
+        this.syncJobs();
         this.intervalId = setInterval(() => this.syncJobs(), this.config.refreshInterval);
         console.log('Interval started', this.intervalId);
     }
@@ -63,7 +65,7 @@ export default class TaskManager {
             await this.invokeJob(schedule)
         })
 
-        console.log('Task scheduled: ', key, schedule, task);
+        console.log('Task scheduled: ', key, schedule);
         this.tasks[key] = task;
     }
 
