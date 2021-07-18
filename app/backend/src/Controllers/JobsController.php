@@ -24,6 +24,7 @@ class JobsController extends Controller
         $filter->setStateAlias(Job::STATE_ENABLED);
 
         $provider = $jobRepository->provide($filter);
+        $provider->setPagination(false);
 
         return $provider;
     }

@@ -25,6 +25,7 @@ class SchedulesController extends Controller
         $filter->setJobStateAlias(Job::STATE_ENABLED);
 
         $provider = $scheduleRepository->provide($filter);
+        $provider->setPagination(false);
 
         return $provider;
     }
