@@ -44,10 +44,10 @@ class Schedule extends ActiveRecord
             ['schedule_job_alias', 'string'],
             ['schedule_expression', 'string'],
 
-            ['schedule_creator_alias', 'in', 'range', [static::CREATOR_SYSTEM, static::CREATOR_USER]],
+            ['schedule_creator_alias', 'in', 'range' => [static::CREATOR_SYSTEM, static::CREATOR_USER]],
             ['schedule_creator_alias', 'default', 'value' => static::CREATOR_USER],
 
-            ['schedule_state_alias', 'in', 'range', [static::STATE_ENABLED, static::STATE_DISABLED]],
+            ['schedule_state_alias', 'in', 'range' => [static::STATE_ENABLED, static::STATE_DISABLED]],
             ['schedule_state_alias', 'default', 'value' => static::STATE_ENABLED],
         ];
     }
