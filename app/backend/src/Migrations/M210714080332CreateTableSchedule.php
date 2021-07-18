@@ -38,7 +38,7 @@ create table $fullSchedule
   -- https://regexr.com/5bdes
   -- https://stackoverflow.com/a/63729682
   constraint {$tableSchedule}_schedule_expression_check
-    check ( schedule_expression ~ '/^((((\d+,)+\d+|(\d+(\/|-|#)\d+)|\d+L?|\*(\/\d+)?|L(-\d+)?|\?|[A-Z]{3}(-[A-Z]{3})?) ?){6,6})$/gm' ),
+    check ( schedule_expression ~ '/^((((\d+,)+\d+|(\d+(\/|-|#)\d+)|\d+L?|\*(\/\d+)?|L(-\d+)?|\?|[A-Z]{3}(-[A-Z]{3})?)(\s*)?){6,6})$/gm' ),
 
   constraint {$tableSchedule}_schedule_state_alias_check
     check ( schedule_state_alias in ('enabled', 'disabled') ),
