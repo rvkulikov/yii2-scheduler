@@ -90,7 +90,7 @@ class Schedule extends ActiveRecord
         return $this->schedule_creator_alias;
     }
 
-    public function setCreatorAlias(string $creatorAlias): static
+    public function setCreatorAlias(?string $creatorAlias): static
     {
         $this->schedule_creator_alias = $creatorAlias;
         return $this;
@@ -101,7 +101,7 @@ class Schedule extends ActiveRecord
         return $this->schedule_state_alias;
     }
 
-    public function setStateAlias(string $stateAlias): static
+    public function setStateAlias(?string $stateAlias): static
     {
         $this->schedule_state_alias = $stateAlias;
         return $this;

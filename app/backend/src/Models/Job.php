@@ -85,27 +85,27 @@ class Job extends ActiveRecord
         return $this->job_state_alias;
     }
 
-    public function setAlias(string $job_alias): static
+    public function setAlias(string $alias): static
     {
-        $this->job_alias = $job_alias;
+        $this->job_alias = $alias;
         return $this;
     }
 
-    public function setName(string $job_title): static
+    public function setName(?string $title): static
     {
-        $this->job_name = $job_title;
+        $this->job_name = $title;
         return $this;
     }
 
-    public function setDescription(string $job_description): static
+    public function setDescription(?string $description): static
     {
-        $this->job_description = $job_description;
+        $this->job_description = $description;
         return $this;
     }
 
-    public function setStateAlias(string $job_state_alias): static
+    public function setStateAlias(?string $stateAlias): static
     {
-        $this->job_state_alias = $job_state_alias;
+        $this->job_state_alias = $stateAlias;
         return $this;
     }
 }

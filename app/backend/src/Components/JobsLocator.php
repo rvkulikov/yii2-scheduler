@@ -37,7 +37,7 @@ class JobsLocator extends BaseObject implements JobsLocatorInterface
         if ($this->processed === null) {
 
             if (is_callable($this->definitions)) {
-                $callback    = $this->getPreprocessor();
+                $callback    = $this->definitions;
                 $callback    = Closure::fromCallable($callback);
                 $definitions = Yii::$container->invoke($callback);
             } else {
