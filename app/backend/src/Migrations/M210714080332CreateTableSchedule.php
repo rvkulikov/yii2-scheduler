@@ -29,6 +29,9 @@ create table $fullSchedule
   schedule_state_alias   text not null default 'enabled',
   schedule_creator_alias text not null default 'user',
 
+  constraint {$tableSchedule}_pk
+    primary key (schedule_job_alias, schedule_expression),
+      
   constraint {$tableSchedule}_schedule_job_alias_fk
     foreign key (schedule_job_alias)
       references $fullJob (job_alias)
@@ -44,10 +47,7 @@ create table $fullSchedule
     check ( schedule_state_alias in ('enabled', 'disabled') ),
 
   constraint {$tableSchedule}_schedule_creator_alias_check
-    check ( schedule_creator_alias in ('system', 'user') ),
-
-  constraint {$tableSchedule}_uindex
-    unique (schedule_job_alias, schedule_expression)
+    check ( schedule_creator_alias in ('system', 'user') )
 );
 SQL;
 
