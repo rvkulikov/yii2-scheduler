@@ -17,11 +17,11 @@ RUN yarn install --prod
 
 FROM node:16-alpine3.12
 
-ENV PORT = 3000;
-ENV REFRESH_INTERVAL = 5;
-ENV BASE_URL = 'yii2-scheduler.scheduler';
-ENV SCHEDULE_INDEX_PATH = 'schedule/schedules/index';
-ENV JOB_INVOKE_PATH = 'schedule/jobs/invoke';
+ENV PORT=3000
+ENV REFRESH_INTERVAL=5
+ENV BASE_URL="yii2-scheduler.scheduler"
+ENV SCHEDULE_INDEX_PATH="schedule/schedules/index"
+ENV JOB_INVOKE_PATH="schedule/jobs/invoke"
 
 WORKDIR /app
 COPY ./app/scheduler /app
