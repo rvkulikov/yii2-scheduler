@@ -21,7 +21,7 @@ class M210714080314CreateTableJob extends Migration
 -- noinspection SqlResolve
 create table $fullJob
 (
-  job_id          uuid not null generated always as ( public.uuid_generate_v4() ) stored,
+  job_id          uuid not null default public.uuid_generate_v4(),
   job_alias       text not null,
   job_name        text not null default '',
   job_description text not null default '',
