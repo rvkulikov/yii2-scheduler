@@ -64,7 +64,7 @@ class Schedule extends ActiveRecord
      */
     public function getJob()
     {
-        return $this->hasOne(Job::class, ['job_alias' => 'job_alias']);
+        return $this->hasOne(Job::class, ['job_alias' => 'schedule_job_alias']);
     }
 
     public function getJobAlias(): string
