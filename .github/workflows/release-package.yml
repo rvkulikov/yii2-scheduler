@@ -3,6 +3,10 @@ name: App
 on:
   push:
     branches: [main]
+    paths:
+      - '.github/**/*'
+      - 'app/scheduler/**/*'
+      - 'deployment/**/*'
 
 jobs:
   build-scheduler:
