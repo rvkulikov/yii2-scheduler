@@ -13,13 +13,7 @@ use const FILTER_VALIDATE_BOOL;
 
 class SettingsLocator extends BaseObject implements SettingsLocatorInterface
 {
-    public function __construct(
-        $config = [],
-        protected mixed $cronEnabled = false,
-    )
-    {
-        parent::__construct($config);
-    }
+    protected mixed $cronEnabled = false;
 
     /**
      * @throws NotInstantiableException

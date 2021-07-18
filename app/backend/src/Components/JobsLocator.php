@@ -14,16 +14,9 @@ use function is_callable;
 
 class JobsLocator extends BaseObject implements JobsLocatorInterface
 {
-    protected ?array $processed = null;
-
-    public function __construct(
-        $config = [],
-        protected mixed $preprocessor = null,
-        protected mixed $definitions = [],
-    )
-    {
-        parent::__construct($config);
-    }
+    protected ?array $processed    = null;
+    protected mixed  $preprocessor = null;
+    protected mixed  $definitions  = [];
 
     public function getPreprocessor(): ?callable
     {

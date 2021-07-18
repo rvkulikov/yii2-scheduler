@@ -10,17 +10,10 @@ use yii\base\BaseObject;
 
 class DefinitionLocator extends BaseObject implements DefinitionLocatorInterface
 {
-    public function __construct(
-        $config = [],
-        public string $jobClass = Job::class,
-        public string $scheduleClass = Schedule::class,
-        public string $jobFilterClass = JobFilter::class,
-        public string $scheduleFilterClass = ScheduleFilter::class,
-    )
-    {
-        parent::__construct($config);
-    }
-
+    protected string $jobClass            = Job::class;
+    protected string $scheduleClass       = Schedule::class;
+    protected string $jobFilterClass      = JobFilter::class;
+    protected string $scheduleFilterClass = ScheduleFilter::class;
 
     public function setJobClass(string $jobClass): static
     {

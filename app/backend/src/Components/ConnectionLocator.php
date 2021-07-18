@@ -9,17 +9,11 @@ use yii\db\Connection;
 
 class ConnectionLocator extends BaseObject implements ConnectionLocatorInterface
 {
-    public function __construct(
-        $config = [],
-        protected string $db = 'db',
-        protected ?string $schema = '_app_schedule',
-        protected string $tableJob = 'job',
-        protected string $tableSchedule = 'schedule',
-        protected string $tableMigration = 'migration',
-    )
-    {
-        parent::__construct($config);
-    }
+    protected string  $db             = 'db';
+    protected ?string $schema         = '_app_schedule';
+    protected string  $tableJob       = 'job';
+    protected string  $tableSchedule  = 'schedule';
+    protected string  $tableMigration = 'migration';
 
     public function getDb(): string
     {
