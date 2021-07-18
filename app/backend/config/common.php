@@ -23,7 +23,7 @@ use Rvkulikov\Yii2\Scheduler\Services\ScheduleRepository\ScheduleRepositoryInter
 
 return [
     'aliases'   => [
-        '@Rvkulikov\Yii2\Scheduler' => dirname(__DIR__) . '/src'
+        '@Rvkulikov/Yii2/Scheduler' => dirname(__DIR__) . '/src'
     ],
     'container' => [
         'singletons' => [
