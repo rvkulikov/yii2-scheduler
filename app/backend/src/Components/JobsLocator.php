@@ -56,7 +56,7 @@ class JobsLocator extends BaseObject implements JobsLocatorInterface
         return $this->processed;
     }
 
-    public function setDefinitions(array $definitions): static
+    public function setDefinitions(mixed $definitions): static
     {
         $this->definitions = $definitions;
         $this->processed   = null;
