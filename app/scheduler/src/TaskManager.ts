@@ -8,6 +8,7 @@ import RemoveTuple = app.RemoveTuple;
 import CronSchedulesEnvelope = app.CronSchedulesEnvelope;
 import TaskManagerConfig = app.TaskManagerConfig;
 import Timeout = NodeJS.Timeout;
+import Schedule = app.Schedule;
 
 // noinspection HttpUrlsUsage
 export default class TaskManager {
@@ -22,11 +23,14 @@ export default class TaskManager {
 
     public startInterval() {
         this.intervalId = setInterval(() => this.syncJobs(), this.config.refreshInterval);
+        console.log('Interval started', this.intervalId);
     }
 
     // noinspection JSUnusedGlobalSymbols
     public clearInterval() {
         clearInterval(this.intervalId);
+        console.log('Interval cleared', this.intervalId);
+        this.intervalId = undefined;
     }
 
     public setTasks(schedules: CronSchedule[]) {
@@ -56,22 +60,7 @@ export default class TaskManager {
         const [key, schedule] = tuple;
 
         const task = scheduleJob(schedule.schedule_expression, async () => {
-            try {
-                const data = await this.invokeJob(schedule.schedule_job_alias);
-                console.debug(
-                    `[${new Date().toISOString()}]`,
-                    `[${schedule.schedule_job_alias}]`,
-                    `[${schedule.schedule_expression}]`,
-                    data
-                )
-            } catch (e) {
-                console.error(
-                    `[${new Date().toISOString()}]`,
-                    `[${schedule.schedule_job_alias}]`,
-                    `[${schedule.schedule_expression}]`,
-                    e.message
-                );
-            }
+            await this.invokeJob(schedule)
         })
 
         console.log('Task scheduled: ', key, schedule, task);
@@ -98,23 +87,51 @@ export default class TaskManager {
         return `${schedule.schedule_job_alias}|${schedule.schedule_expression}`;
     }
 
-    public syncJobs() {
+    public async syncJobs() {
         const url = `http://${this.config.baseUrl}/${this.config.scheduleIndexPath}`;
 
-        return this.axios.get(url).then((result) => {
-            let envelope: CronSchedulesEnvelope = result.data;
-            if (envelope._runtime.cronEnabled) {
-                this.setTasks(envelope.items)
-            } else {
-                this.flushTasks();
-            }
-        });
+        try {
+            const {data} = await this.axios.get<CronSchedulesEnvelope>(url);
+            data._runtime.cronEnabled
+                ? this.setTasks(data.items)
+                : this.flushTasks();
+
+            console.debug(
+                `[${new Date().toISOString()}]`,
+                `[sync_jobs]`,
+                data
+            )
+        } catch (e) {
+            console.error(
+                `[${new Date().toISOString()}]`,
+                `[sync_jobs]`,
+                e.message
+            );
+        }
     }
 
-    public async invokeJob(key: string) {
+    public async invokeJob(schedule: Schedule) {
         const url    = `http://${this.config.baseUrl}/${this.config.jobInvokePath}`;
-        const {data} = await this.axios.get(url, {params: {key: key}});
 
-        return data;
+        try {
+            const {data} = await this.axios.get(url, {params: {key: schedule.schedule_job_alias}});
+            console.debug(
+                `[${new Date().toISOString()}]`,
+                `[${schedule.schedule_job_alias}]`,
+                `[${schedule.schedule_expression}]`,
+                data
+            );
+
+            return data;
+        } catch (e) {
+            console.error(
+                `[${new Date().toISOString()}]`,
+                `[${schedule.schedule_job_alias}]`,
+                `[${schedule.schedule_expression}]`,
+                e.message
+            );
+        }
+
+        return undefined;
     }
 }
