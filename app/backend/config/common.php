@@ -36,7 +36,7 @@ return [
             ],
             ConnectionLocatorInterface::class => [
                 'class'          => ConnectionLocator::class,
-                'connection'     => 'db',
+                'db'             => 'db',
                 'schema'         => '_app_schedule',
                 'tableJob'       => 'job',
                 'tableSchedule'  => 'schedule',
