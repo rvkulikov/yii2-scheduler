@@ -16,7 +16,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "\\Rvkulikov\\Yii2\\Scheduler\\": "app/backend/src"
+      "Rvkulikov\\Yii2\\Scheduler\\": "app/backend/src"
     }
   },
   "extra": {
