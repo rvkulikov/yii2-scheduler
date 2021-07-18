@@ -10,6 +10,7 @@ use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 use yii\di\NotInstantiableException;
 use function array_map;
+use function is_callable;
 
 class JobsLocator extends BaseObject implements JobsLocatorInterface
 {
@@ -18,7 +19,7 @@ class JobsLocator extends BaseObject implements JobsLocatorInterface
     public function __construct(
         $config = [],
         protected mixed $preprocessor = null,
-        protected array $definitions = [],
+        protected mixed $definitions = [],
     )
     {
         parent::__construct($config);
@@ -41,21 +42,32 @@ class JobsLocator extends BaseObject implements JobsLocatorInterface
     public function getDefinitions(): array
     {
         if ($this->processed === null) {
+
+            if (is_callable($this->definitions)) {
+                $callback    = $this->getPreprocessor();
+                $callback    = Closure::fromCallable($callback);
+                $definitions = Yii::$container->invoke($callback);
+            } else {
+                $definitions = $this->definitions;
+            }
+
             if ($this->preprocessor) {
                 $callback        = $this->getPreprocessor();
                 $callback        = Closure::fromCallable($callback);
-                $this->processed = Yii::$container->invoke($callback, [$this->definitions]);
+                $this->processed = Yii::$container->invoke($callback, [$definitions]);
             } else {
                 $this->processed = $this->definitions;
             }
         }
 
-        return $this->definitions;
+        return $this->processed;
     }
 
     public function setDefinitions(array $definitions): static
     {
         $this->definitions = $definitions;
+        $this->processed   = null;
+
         return $this;
     }
 
