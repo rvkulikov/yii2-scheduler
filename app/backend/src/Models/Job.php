@@ -11,11 +11,11 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * @property string $job_id
- * @property string $job_alias
- * @property string $job_name
- * @property string $job_description
- * @property string $job_state_alias
+ * @property string          $job_id
+ * @property string          $job_alias
+ * @property string          $job_name
+ * @property string          $job_description
+ * @property string          $job_state_alias
  *
  * @property-read Schedule[] $schedules
  */
@@ -37,11 +37,17 @@ class Job extends ActiveRecord
     public function rules(): array
     {
         return [
-            ['job_id', 'string'],
             ['job_alias', 'string'],
-            ['job_name', 'integer'],
+            ['job_alias', 'required'],
+
+            ['job_name', 'string'],
+            ['job_name', 'default', 'value' => ''],
+
             ['job_description', 'string'],
+            ['job_description', 'default', 'value' => ''],
+
             ['job_state_alias', 'in', 'range' => [static::STATE_ENABLED, static::STATE_DISABLED]],
+            ['job_state_alias', 'default', 'value' => static::STATE_ENABLED],
         ];
     }
 
