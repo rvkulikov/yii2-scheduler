@@ -39,7 +39,7 @@ class Job extends ActiveRecord
         return [
             ['job_id', 'string'],
             ['job_alias', 'string'],
-            ['job_title', 'integer'],
+            ['job_name', 'integer'],
             ['job_description', 'string'],
             ['job_state_alias', 'in', 'range' => [static::STATE_ENABLED, static::STATE_DISABLED]],
         ];
