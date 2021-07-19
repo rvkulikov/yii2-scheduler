@@ -12,7 +12,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-const config        = {
+const config = {
     refreshInterval: parseInt(process.env.REFRESH_INTERVAL || '5', 10) * 1000, // 5 seconds default
     baseUrl: process.env.BASE_URL,
     scheduleIndexPath: process.env.SCHEDULE_INDEX_PATH || "schedule/schedules/index",
