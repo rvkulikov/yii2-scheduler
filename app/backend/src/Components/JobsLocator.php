@@ -5,6 +5,8 @@ namespace Rvkulikov\Yii2\Scheduler\Components;
 use Closure;
 use Rvkulikov\Yii2\Scheduler\Dto\JobDefinition;
 use Rvkulikov\Yii2\Scheduler\Dto\ScheduleDefinition;
+use Rvkulikov\Yii2\Scheduler\Models\Job;
+use Rvkulikov\Yii2\Scheduler\Models\Schedule;
 use Yii;
 use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
@@ -69,9 +71,12 @@ class JobsLocator extends BaseObject implements JobsLocatorInterface
         $definitions = array_map(fn(array $tuple) => new JobDefinition(
             alias: $tuple[0],
             callback: $tuple[1],
+            stateAlias: Job::STATE_ENABLED,
             scheduleDefinitions: array_map(fn(string $expression) => new ScheduleDefinition(
                 jobAlias: $tuple[0],
                 expression: $expression,
+                creatorAlias: Schedule::CREATOR_SYSTEM,
+                stateAlias: Schedule::STATE_ENABLED,
             ), $tuple[2])
         ), $tuples);
 
@@ -85,10 +90,12 @@ class JobsLocator extends BaseObject implements JobsLocatorInterface
             callback: $job['callback'],
             name: $job['name'] ?? null,
             description: $job['description'] ?? null,
-            stateAlias: $job['stateAlias'] ?? null,
+            stateAlias: $job['stateAlias'] ?? Job::STATE_ENABLED,
             scheduleDefinitions: array_map(fn(string $expression) => new ScheduleDefinition(
                 jobAlias: $job['alias'],
                 expression: $expression,
+                creatorAlias: Schedule::CREATOR_SYSTEM,
+                stateAlias: Schedule::STATE_ENABLED,
             ), $job['expressions'])
         ), $structs);
 
@@ -102,12 +109,12 @@ class JobsLocator extends BaseObject implements JobsLocatorInterface
             callback: $job['callback'],
             name: $job['name'] ?? null,
             description: $job['description'] ?? null,
-            stateAlias: $job['stateAlias'] ?? null,
+            stateAlias: $job['stateAlias'] ?? Job::STATE_ENABLED,
             scheduleDefinitions: array_map(fn(array $schedule) => new ScheduleDefinition(
                 jobAlias: $job['alias'],
                 expression: $schedule['expression'],
-                creatorAlias: $schedule['creatorAlias'] ?? null,
-                stateAlias: $schedule['stateAlias'] ?? null,
+                creatorAlias: $schedule['creatorAlias'] ?? Schedule::CREATOR_SYSTEM,
+                stateAlias: $schedule['stateAlias'] ?? Schedule::STATE_ENABLED,
             ), $job['schedules'])
         ), $structs);
 
