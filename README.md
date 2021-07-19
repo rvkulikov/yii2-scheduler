@@ -30,33 +30,33 @@ do $$ begin
       then raise notice 'not creating role "_app_reader"';
 end $$;
 
-create schema if not exists "_amocrm_schedule";
-alter schema "_amocrm_schedule" owner to "_app_admin";
+create schema if not exists "_app_schedule";
+alter schema "_app_schedule" owner to "_app_admin";
 
-grant all on schema "_amocrm_schedule" to "_app_admin";
+grant all on schema "_app_schedule" to "_app_admin";
 
-grant all on all tables in schema "_amocrm_schedule" to "_app_admin";
-grant all on all sequences in schema "_amocrm_schedule" to "_app_admin";
-grant all on all functions in schema "_amocrm_schedule" to "_app_admin";
-grant all on all routines in schema "_amocrm_schedule" to "_app_admin";
+grant all on all tables in schema "_app_schedule" to "_app_admin";
+grant all on all sequences in schema "_app_schedule" to "_app_admin";
+grant all on all functions in schema "_app_schedule" to "_app_admin";
+grant all on all routines in schema "_app_schedule" to "_app_admin";
 
-alter default privileges in schema "_amocrm_schedule" grant all on tables to "_app_admin";
-alter default privileges in schema "_amocrm_schedule" grant all on sequences to "_app_admin";
-alter default privileges in schema "_amocrm_schedule" grant all on functions to "_app_admin";
-alter default privileges in schema "_amocrm_schedule" grant all on routines to "_app_admin";
+alter default privileges in schema "_app_schedule" grant all on tables to "_app_admin";
+alter default privileges in schema "_app_schedule" grant all on sequences to "_app_admin";
+alter default privileges in schema "_app_schedule" grant all on functions to "_app_admin";
+alter default privileges in schema "_app_schedule" grant all on routines to "_app_admin";
 
 -- grant reader
-grant usage on schema "_amocrm_schedule" to "_app_reader";
+grant usage on schema "_app_schedule" to "_app_reader";
 
-grant select on all tables in schema "_amocrm_schedule" to "_app_reader";
-grant select on all sequences in schema "_amocrm_schedule" to "_app_reader";
+grant select on all tables in schema "_app_schedule" to "_app_reader";
+grant select on all sequences in schema "_app_schedule" to "_app_reader";
 
-alter default privileges in schema "_amocrm_schedule" grant select on tables to "_app_reader";
-alter default privileges in schema "_amocrm_schedule" grant select on sequences to "_app_reader";
+alter default privileges in schema "_app_schedule" grant select on tables to "_app_reader";
+alter default privileges in schema "_app_schedule" grant select on sequences to "_app_reader";
 
 set role "_app_admin";
-  alter default privileges in schema "_amocrm_schedule" grant select on tables to "_app_reader";
-  alter default privileges in schema "_amocrm_schedule" grant select on sequences to "_app_reader";
+  alter default privileges in schema "_app_schedule" grant select on tables to "_app_reader";
+  alter default privileges in schema "_app_schedule" grant select on sequences to "_app_reader";
 set role postgres;
 ```
 
