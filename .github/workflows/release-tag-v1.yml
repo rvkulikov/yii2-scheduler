@@ -3,7 +3,7 @@ name: Tagged
 on:
   push:
     tags:
-      - 'v1*'
+      - '1*'
 
 jobs:
   build-scheduler:
