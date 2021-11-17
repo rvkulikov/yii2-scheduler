@@ -3,7 +3,7 @@ name: Tagged
 on:
   push:
     tags:
-      - '*'
+      - 'v1*'
 
 jobs:
   build-scheduler:
@@ -29,4 +29,5 @@ jobs:
           file: deployment/docker/scheduler/Dockerfile
           push: true
           tags: |
+            ghcr.io/${{ github.repository }}/scheduler:1
             ghcr.io/${{ github.repository }}/scheduler:${{ github.ref_name }}
