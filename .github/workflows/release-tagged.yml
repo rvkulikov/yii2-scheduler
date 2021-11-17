@@ -29,4 +29,4 @@ jobs:
           file: deployment/docker/scheduler/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/scheduler:${{ GITHUB_REF_NAME }}
+            ghcr.io/${{ github.repository }}/scheduler:${{ github.ref }}
